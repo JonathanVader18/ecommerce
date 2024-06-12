@@ -1,0 +1,56 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>file_name.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;file(name)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Get a file with the specified name. You can specify folders
+in the name : the folder separator is a forward slash (&quot;/&quot;).</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>the name of the file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns</strong> : An instance of <a href="{{site.baseurl}}/documentation/api_zipobject.html">ZipObject</a> representing
+the file if any, <code>null</code> otherwise.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!-- __Complexity__ : This is a simple lookup in **O(1)**. -->
+<p><strong>Examples</strong></p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.file(&quot;file.txt&quot;, &quot;content&quot;);
+
+zip.file(&quot;file.txt&quot;).name // &quot;file.txt&quot;
+zip.file(&quot;file.txt&quot;).asText() // &quot;content&quot;
+zip.file(&quot;file.txt&quot;).options.dir // false
+
+// utf8 example
+var zip = new JSZip(zipFromAjaxWithUTF8);
+zip.file(&quot;amount.txt&quot;).asText() // &quot;€15&quot;
+zip.file(&quot;amount.txt&quot;).asArrayBuffer() // an ArrayBuffer containing €15 encoded as utf8
+zip.file(&quot;amount.txt&quot;).asUint8Array() // an Uint8Array containing €15 encoded as utf8
+
+// with folders
+zip.folder(&quot;sub&quot;).file(&quot;file.txt&quot;, &quot;content&quot;);
+zip.file(&quot;sub/file.txt&quot;); // the file
+// or
+zip.folder(&quot;sub&quot;).file(&quot;file.txt&quot;) // the file
+</code></pre>
+
+      </body>
+    </html>

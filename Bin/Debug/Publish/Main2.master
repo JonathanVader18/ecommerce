@@ -1,0 +1,726 @@
+﻿<%@ master language="VB" inherits="Main2, App_Web_3bsbwt4p" %>
+
+<%--<%@ register assembly="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
+--%>
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="">
+<head runat="server">
+   <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/jquery.bootstrap-touchspin.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/detectizr/2.2.0/detectizr.min.js"></script>
+     <asp:ContentPlaceHolder id="head" runat="server">
+      
+    </asp:ContentPlaceHolder>
+
+</head>
+ 
+
+ <body class="gtk" >
+    <div id="cd-shadow-layer"></div>
+   
+
+
+     <form id="form1" runat="server" >
+    
+        
+    <header class ="main-container">
+     
+     
+         
+       <asp:Panel ID="pnlB2B" runat="server"></asp:Panel>
+    	
+            <div class="sec-nav">
+                <div class="logo">
+                    <a href="index.aspx"><img src="img/header/logo.png"  alt="Logotipo-marca" class="img-responsive"/></a>
+                </div>
+                <nav class="tools">
+                    <div class="settings">
+                        <asp:Panel ID="pnlLogin" runat="server">
+                        <li id="fat-menu" class="user action-icons"> 
+                            <a href="#" class="dropdown-toggle" id="drop3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                                <asp:Panel runat ="server"  ID="pnlIconUser">
+                                    <img src="img/header/user.svg" alt="icono-user" class="img-responsive"> 
+
+                                </asp:Panel>
+                            </a> 
+                            <ul aria-labelledby="drop3" class="dropdown-menu drop-right">
+                                <span>ingresar</span><br /><br />
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                    usuario</label>
+                                    <asp:TextBox ID="txtUser" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">
+                                    contraseña</label>
+                                    <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                </div>
+                                <div class="post-auto">
+                                    <a class="link-lp" href="mi-cuenta.aspx">crear cuenta</a>
+                                    <a class="link-lp" href="recuperar.aspx">¿olvidaste tu contraseña?</a>
+                                </div>
+                                <asp:Button ID="btnIngresar" runat="server" class="btn btn-general-2" Text="Entrar" />
+                               
+                            </ul>
+                        </li>
+
+                        </asp:Panel>
+                        <asp:Panel ID="pnlCliente" Visible ="false"  runat="server">
+                             <li id="fat-menu" class="lang action-icons"> 
+                            <a href="#" class="dropdown-toggle" id="drop4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              <img src="img/header/user.svg" alt="icono-user" class="img-responsive"> 
+                                   <span class="caret"></span>  </a><ul class="dropdown-menu drop-mini" aria-labelledby="drop3">
+<li><a><asp:Label ID="lblUsuario" runat="server" Text="Label" Font-Size ="Smaller" ></asp:Label></a></li>
+
+                                      
+                                    <li><a href="preferencias.aspx">mi cuenta</a></li>
+                                   <asp:Panel ID="pnlelegir" runat="server" ><li><a href="elegir-cliente.aspx">elegir otro cliente</a></li></asp:Panel> 
+                                    <li><a href="logout.aspx">cerrar sesión</a></li>
+                                </ul>
+                                   
+                                    
+                          
+                                <%--<asp:ImageButton ID="btnCerrarSesion" class="btn btn-default btn-lg" runat="server" AlternateText ="" ImageUrl ="images/logout.png" ImageAlign="Middle" visible="false"/>--%>
+                         
+                        </li>
+                        </asp:Panel>
+                        <asp:Panel runat="server" ID="pnlIdioma" Visible="true">
+
+
+                            <li id="fat-menu" class="lang action-icons">
+                                <a href="#" class="dropdown-toggle" id="drop3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ES<span class="caret"></span></a>
+
+
+                                <ul class="dropdown-menu drop-mini" aria-labelledby="drop3">
+                                    <li><a href="index.aspx?lang=ES">ES</a></li>
+                                    <li><a href="index.aspx?lang=EN">EN</a></li>
+                                </ul>
+                            </li>
+
+                        </asp:Panel>
+                    </div>
+
+                    <div class="e-commerce">
+
+                        <div class="search action-icons">
+
+                            <div class="top-search">
+                              <a href="#" class="dropdown-toggle" id="drop5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                                 <img src="img/header/search.svg" alt="icono-?" class="img-responsive">
+          
+                              </a> 
+ 
+                              <div class="dropdown-menu pull-right">
+                                <div id="search" class="input-group">
+                                   <asp:TextBox ID="txtBuscar" runat="server" ClientIdMode="Static" AutoCompleteType="Search"  CssClass ="form-control"></asp:TextBox>
+                               
+                                  <span class="input-group-btn">
+                                            
+                                     <%--  <button type="button" class="btn btn-default btn-lg" onclick ="<%Session("sesBuscar") = txtBuscar.Text  %>"><a class="fa fa-search" href="catalogo.aspx"></a></button>--%>
+                                      <asp:ImageButton ID="btnBuscar" class="fa fa-search" runat="server" AlternateText ="" ImageUrl ="images/Search.png" ImageAlign="Middle"  />
+                                  
+                                  <%--  <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>--%>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div  class="like action-icons">
+                            <!--  -->
+                            <li id="fat-menu" class="user action-icons"> 
+                                <a href="#" class="dropdown-toggle" id="drop3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                                     <img src="img/header/heart.svg" alt="icono-?" class="img-responsive"/>
+                                </a> 
+                                <ul class="dropdown-menu drop-right" aria-labelledby="drop3">
+                                    <asp:ContentPlaceHolder ID="pnlFavoritos" runat="server"></asp:ContentPlaceHolder>
+                                     <asp:ContentPlaceHolder ID="pnlListaDeseos" runat="server" Visible ="true" >
+                                         <li><a href="Listadeseos.aspx">Lista de deseos</a></li>
+                                     </asp:ContentPlaceHolder>
+                                </ul>                                 
+                            </li> 
+                           
+                        </div>
+                     
+                        <a class="carrito-popup visible-xs hidden" href="carrito-modal.aspx"><img src="img/header/cart.svg" alt="icono-?" class="img-responsive"></a>
+                        <div  class="hidden-xs cart action-icons">
+                            <!--  -->
+                            <li id="fat-menu" class="user action-icons"> 
+                                <a href="carrito.aspx" class="dropdown-toggle" id="drop7" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                                    <img src="img/header/cart.svg" alt="icono-?" class="img-responsive">
+                                   <asp:Panel ID="pnlContadorCarrito" runat="server" Visible ="false" >  <span class="prev-items"><asp:Label ID="lblItemsCarrito" runat="server" Text=""></asp:Label></span></asp:Panel>
+                                </a> 
+                                <ul class="dropdown-menu drop-right drop-mini" aria-labelledby="drop3"> 
+                                    <strong>Carrito de compras</strong>
+                                   <ul class="nav-carrito">
+                                        <asp:Panel ID="pnlCarrito" runat="server"></asp:Panel>
+                                   
+                                    </ul>
+                                   <div class="row">
+                                      <div class="col-xs-12 col-sm-6"><a type="submit" class="btn btn-general-4" href="carrito.aspx">ver carrito</a></div>
+                                       <asp:Panel ID="pnlProcesarPago" runat="server" Visible ="true" >
+                                           <div class="col-xs-12 col-sm-6"><a type="submit" class="btn btn-general-3" href="mi-cuenta.aspx">procesar pago</a></div>
+                                       </asp:Panel>
+                                      
+                                    </div>
+                                  
+                                </ul> 
+                            </li>
+                            <!--  -->
+                        </div>
+                    </div>
+                </nav>
+                    <div class="visible-xs hidden control-m-r">
+                <div id="cd-cart-trigger">
+                    <a class="cd-img-replace" href="#0">
+                      <div class = "navicon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </a>
+                    </div>
+            </div>  
+                <div id="cd-cart">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div id="search1" class="input-group">
+                            <input type="text" name="q" id="text-search" value="" placeholder="Buscar" class="form-control input-lg" aria-label="Buscar en todos los productos... ">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                        <ul class="panel-menu">
+                            <asp:ContentPlaceHolder ID="pnlMenuResponsiveHeader" runat="server"></asp:ContentPlaceHolder>
+                            <li class="panel">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <a class="link-m-r" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Usuario
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+
+                                        <a class="link-m-r" href="clientMyInfo">Mis Datos</a>
+                                        <a class="link-m-r" href="logOut">Salir</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="panel">
+                                <div class="panel-heading" role="tab" id="headingFour">
+                                    <a role="button" class="link-m-r" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Lista de deseos
+                                    </a>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="panel-body">
+                                        <a class="link-m-r" href="invoice">lista 1</a>
+                                        <a class="link-m-r" href="invoice">lista 2</a>
+                                        <a class="link-m-r" href="notaCred">Mis Listas</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                       
+                </div>
+                 </div>
+            <div class="p-nav">
+                <div class="navbar yamm menu ">
+                    <div id="navbar-collapse-1" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <!-- Classic list -->
+                            <asp:ContentPlaceHolder ID="pnlMenuClasicoHeader" runat="server"></asp:ContentPlaceHolder>
+                           
+                           
+                             </ul>
+                    </div>
+                      <div class="col-xs-10">
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+
+                                  <%--              <div class="tab-pane active" id="principal">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                            <li><a href="catalogo.php">novedades 1</a></li>
+                                                            <li><a href="catalogo.php">novedades 2</a></li>
+                                                            <li><a href="catalogo.php">novedades 3</a></li>
+                                                            <li><a href="catalogo.php">novedades 4</a></li>
+                                                            <li><a href="catalogo.php">novedades 5</a></li>
+                                                            <li><a href="catalogo.php">novedades 6</a></li>
+                                                            <li><a href="catalogo.php">novedades 7</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                  
+                                                <div class="tab-pane" id="cat-1">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                           
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                            <li><a href="catalogo.php">categoría 1</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="cat-2">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                            <li><a href="catalogo.php">categoría 2</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="cat-3">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                            <li><a href="catalogo.php">categoría 3</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="cat-4">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                            <li><a href="catalogo.php">categoría 4</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="cat-5">
+                                                    <div class="col-xs-3">
+                                                        <ul class="tab-submenu">
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                            <li><a href="catalogo.php">categoría 5</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="">
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <a class="preview-uni-1" href="producto-interior.php">
+                                                                    <div class="img">
+                                                                        <img src="img/home/producto-1.png">
+                                                                        <span class="b-oferta">oferta</span>
+                                                                        <div class="action-products">
+                                                                            <a class="item bag"></a>
+                                                                            <a class="item favorite"></a>
+                                                                            <a class="item view"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <div class="n-product">nombre producto</div>
+                                                                        <div class="d-product">descripción</div>
+                                                                        <span class="p-product">$ 100.00</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>--%>
+                                                      <asp:Panel ID="pnlSubCategoria" runat="server"></asp:Panel>
+                                            </div>
+                                        </div>
+                   
+                    <div class="clearfix"></div>
+                </div>
+                                </div>
+                            <%--  </div>
+                            </li>
+                          </ul>
+                        </li>--%>
+                       
+                              <asp:ContentPlaceHolder ID="pnlMenuUsuario" runat="server">
+
+                              </asp:ContentPlaceHolder>
+                       
+                           
+                 
+    </header>
+   
+
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <footer>
+        	<div class="seccion gray-light sep-20">
+        		<div class="main-container">
+        			<div class="col-xs-12 col-sm-8 pos-letters">
+	        			<div class="nav-redes" >síguenos 
+	        				<ul class="redes">
+                                <asp:Panel runat ="server" ID="pnlRedes">
+
+                                </asp:Panel>
+	        					<%--<li><a href="https://www.facebook.com/bacan.uy" class=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+	        					<li><a href="https://twitter.com/bacan_uy" class=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--%>
+	        				<%--	<li><a href="" class=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--%>
+	        				</ul>
+	        			</div>
+                        <asp:Panel runat="server" ID="pnlnews" Visible ="true" >
+                            <div class="newslatter">
+                                <form class="form-news">
+                                   <%-- <p>newsletter</p>--%>
+                                    <%--<script type="text/javascript" src="http://v3.envialosimple.com/form/renderwidget/format/widget/AdministratorID/107470/FormID/1/Lang/es"></script>--%>
+                                    <input type="email" name="" placeholder="suscríbete al newsletter" class="input-news">
+	        					<a type="submit" class="btn btn-submit">enviar</a>
+                                </form>
+                            </div>
+                        </asp:Panel>
+	        			
+	        		</div>
+        		</div>
+        	</div>
+        	<div>
+        		<div class="main-container menu-inferior sep-30">
+                    <div class="row row-reverse">
+                       
+                        <div class="col-xs-12 hidden-xs visible-sm visible-md visible-lg">
+ 
+                        <asp:ContentPlaceHolder ID="pnlFooter" runat="server"></asp:ContentPlaceHolder>
+
+                            </div>
+                        <div class="col-xs-12 visible-xs hidden-sm hidden-md hidden-lg">
+ 
+                        <asp:ContentPlaceHolder ID="pnlFooterResponsive" runat="server"></asp:ContentPlaceHolder>
+
+                            </div>
+                        <asp:Panel ID="pnlUsuarioLogin" runat="server" Visible="false" >
+                        </asp:Panel>
+            			
+                    </div>
+        		</div>
+        	</div>
+        	<div class="copy">
+        		<div class="main-container">
+	        		<div class="copy-text">© COPYRIGHT XXXXX 2017 / TODOS LOS DERECHOS RESERVADOS</div>
+	        		<div class="gtk-develope">DISTRIBUIDO POR:<img src="img/fotter/simetria.svg" alt="desarrollado por simetria" class="img-responisve"></div>
+        		</div>
+        	</div>
+        </footer>
+         <script src="http://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="js/jquery.bootstrap-touchspin.min.js"></script>
+        <script src="js/jquery.elevatezoom.js" type="text/javascript"></script>
+        <script src="js/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="js/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="js/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="js/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="js/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="js/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="js/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="js/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+        <script src="js/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="js/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="js/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+        <script src="js/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <script src="js/vendors/jszip/dist/jszip.min.js"></script>
+        <script src="js/vendors/pdfmake/build/pdfmake.min.js"></script>
+        <script src="js/vendors/pdfmake/build/vfs_fonts.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/custom.js"></script>
+
+      <script type="text/javascript">
+          function fnClickEliminar(Articulo) {
+
+               
+
+         window.location.href = 'index.aspx?action=e&code=' + Articulo;
+                            
+                PageMethods.EliminaCarrito(Articulo, onSucess, onError);
+
+                function onSucess(result) {
+                    //  alert(result);
+                    PopUp('', 'eliminado del carrito', 'Aceptar','','','',event);
+                }
+
+                function onError(result) {
+                    alert('Cannot process your request at the moment, please try later.');
+                }
+
+                       
+            }
+             </script>
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                $(".sprin").TouchSpin({
+                  min:1
+                });
+                $(".zoom").elevateZoom({
+                  zoomType: "inner",
+                  cursor: "crosshair"
+                });
+            });
+
+            $('.nav-tabs > li > a').hover(function () {
+                $(this).tab('show');
+                console.log('Si entra');
+            });
+            $('.nav-tabs > li > a').on('click', function () {
+                $(location).attr('href', 'catalogo.aspx');
+            });
+        </script>
+     <!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = 'yh0CZxA5dA';var d=document;var w=window;function l(){
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+</body>
+</html>

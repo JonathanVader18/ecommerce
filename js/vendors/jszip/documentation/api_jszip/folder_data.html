@@ -1,0 +1,44 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>folder_data.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;folder(name)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Create a directory if it doesn&#39;t exist, return a new JSZip
+object with the new folder as root.</p>
+<p>See also <a href="{{site.baseurl}}/documentation/api_jszip/file_data.html">the <code>dir</code> option of file()</a>.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>the name of the directory.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns</strong> : A new JSZip (for chaining), with the new folder as root.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!-- __Complexity__ : **O(1)** -->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">zip.folder(&quot;images&quot;);
+zip.folder(&quot;css&quot;).file(&quot;style.css&quot;, &quot;body {background: #FF0000}&quot;);
+// or specify an absolute path (using forward slashes)
+zip.file(&quot;css/font.css&quot;, &quot;body {font-family: sans-serif}&quot;)
+
+// result : images/, css/, css/style.css, css/font.css
+</code></pre>
+
+      </body>
+    </html>

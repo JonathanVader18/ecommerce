@@ -1,0 +1,75 @@
+
+#map{
+  height: 315px;
+}
+.flex-contacto{
+	display: flex;
+	align-content:center;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin:0 auto;
+	float: none;
+	padding: 100px 0px;
+	@include MQ(767px){
+		padding: 50px 0px;
+	}
+}
+.info-contacto{
+	.dir,.tel,.was,.mail{
+		text-align: left;
+		padding-left:20px;
+		position: relative;
+		font-family:$font-secondary;
+		&:before{
+			position: absolute;
+			content:"";
+		    color: #000000;
+		    width: 20px; 
+		    height: 20px;
+		    left: -15px;
+		    text-align: center;
+		    top: 0px;
+		}
+	}
+	.dir{
+		margin-bottom: 20px;
+		&:before{
+			background-image: url(../img/marker.png);
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: inherit;
+		}
+	}
+	.tel{
+		margin-bottom: 5px;
+		&:before{
+			background-image: url(../img/telefono.png);
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: inherit;
+		}
+	}
+	.was{
+		margin-bottom: 20px;
+		&:before{
+			background-image: url(../img/whatsapp.png);
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: inherit;
+		}
+	}
+	.mail{
+		&:before{
+			background-image: url(../img/mail.png);
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: inherit;
+		}
+	}
+}
+.f-left{
+	margin-top:20px;
+	float:left;
+}

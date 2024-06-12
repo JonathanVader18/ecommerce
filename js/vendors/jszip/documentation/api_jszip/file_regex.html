@@ -1,0 +1,59 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>file_regex.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;file(regex)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Search a file in the current folder and subfolders with a
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expression</a>.
+The regex is tested against the relative filename.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>regex</td>
+<td>RegExp</td>
+<td>the regex to use.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns</strong> : An array of matching files (an empty array if none matched). Each
+maching file is an instance of <a href="{{site.baseurl}}/documentation/api_zipobject.html">ZipObject</a>.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!--
+__Complexity__ : **O(k)** where k is the number of entries in the current JSZip
+instance.
+-->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.file(&quot;file1.txt&quot;, &quot;content&quot;);
+zip.file(&quot;file2.txt&quot;, &quot;content&quot;);
+
+zip.file(/file/); // array of size 2
+
+// example with a relative path :
+var folder = zip.folder(&quot;sub&quot;);
+folder
+  .file(&quot;file3.txt&quot;, &quot;content&quot;)  // relative path from folder : file3.txt
+  .file(&quot;file4.txt&quot;, &quot;content&quot;); // relative path from folder : file4.txt
+
+folder.file(/file/);  // array of size 2
+folder.file(/^file/); // array of size 2, the relative paths start with file
+
+// arrays contain objects in the form:
+// {name: &quot;file2.txt&quot;, dir: false, asText : function () {...}, ...}
+</code></pre>
+
+      </body>
+    </html>

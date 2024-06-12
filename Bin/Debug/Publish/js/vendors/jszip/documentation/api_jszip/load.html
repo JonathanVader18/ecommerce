@@ -1,0 +1,140 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>load.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;load(data [, options])&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Read an existing zip and merge the data in the current JSZip
+object at the current folder level. This technique has some limitations, see
+<a href="{{site.baseurl}}/documentation/limitations.html">here</a>.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>String/Array of bytes/ArrayBuffer/Uint8Array/Buffer</td>
+<td>the zip file</td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>the options to load the zip file</td>
+</tr>
+</tbody>
+</table>
+<p>Content of <code>options</code> :</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options.base64</td>
+<td>boolean</td>
+<td>false</td>
+<td>set to <code>true</code> if the data is base64 encoded, <code>false</code> for binary.</td>
+</tr>
+<tr>
+<td>options.checkCRC32</td>
+<td>boolean</td>
+<td>false</td>
+<td>set to <code>true</code> if the read data should be checked against its CRC32.</td>
+</tr>
+<tr>
+<td>options.optimizedBinaryString</td>
+<td>boolean</td>
+<td>false</td>
+<td>set to true if (and only if) the input is a string and has already been prepared with a 0xFF mask.</td>
+</tr>
+<tr>
+<td>options.createFolders</td>
+<td>boolean</td>
+<td>false</td>
+<td>set to true to create folders in the file path automatically. Leaving it false will result in only virtual folders (i.e. folders that merely represent part of the file path) being created.</td>
+</tr>
+<tr>
+<td>options.decodeFileName</td>
+<td>function</td>
+<td>decode from UTF-8</td>
+<td>the function to decode the file name / comment.</td>
+</tr>
+</tbody>
+</table>
+<p>You shouldn&#39;t update the data given to this method : it is kept as it so any
+update will impact the stored data.</p>
+<p>Zip features supported by this method :</p>
+<ul>
+<li>Compression (<code>DEFLATE</code> supported)</li>
+<li>zip with data descriptor</li>
+<li>ZIP64</li>
+<li>UTF8 in file name, UTF8 in file content</li>
+</ul>
+<p>Zip features not (yet) supported :</p>
+<ul>
+<li>password protected zip</li>
+<li>multi-volume zip</li>
+</ul>
+<p><strong>About <code>decodeFileName</code></strong> :</p>
+<p>A zip file has a flag to say if the filename and comment are encoded with UTF-8.
+If it&#39;s not set, JSZip has <strong>no way</strong> to know the encoding used. It usually
+is the default encoding of the operating system.</p>
+<p>The function takes the bytes array (Uint8Array or Array) and returns the
+decoded string.</p>
+<p><strong>Returns</strong> : The current JSZip object.</p>
+<p><strong>Throws</strong> : An exception if the loaded data is not valid zip data or if it
+uses features (multi volume, password protected, etc).</p>
+<!--
+__Complexity__ : for k the number of entries in the zip file and n the length
+of the data :
+
+The default use case is **O(k)**.
+If the data is in base64, we must first decode it : **O(k + n)**.
+If the data is a string not in base64 and optimizedBinaryString is false, we
+must apply the 0xFF mask : **O(k + n)**.
+If checkCRC32 is true, it **adds** to the above complexity **O(n)** and the
+complexity of the decompression algorithm.
+-->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.load(zipDataFromXHR);
+</code></pre>
+<pre><code class="lang-js">require(&quot;fs&quot;).readFile(&quot;hello.zip&quot;, function (err, data) {
+  if (err) throw err;
+  var zip = new JSZip();
+  zip.load(data);
+}
+</code></pre>
+<p>Using sub folders :</p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.folder(&quot;subfolder&quot;).load(data);
+// the content of data will be loaded in subfolder/
+</code></pre>
+<p>Using a custom charset :</p>
+<pre><code class="lang-js">// using iconv-lite for example
+var iconv = require(&#39;iconv-lite&#39;);
+
+zip.load(content, {
+    decodeFileName: function (bytes) {
+        return iconv.decode(bytes, &#39;your-encoding&#39;);
+    }
+});
+</code></pre>
+
+      </body>
+    </html>

@@ -1,0 +1,35 @@
+/* Compass */
+@import "compass/css3"; 
+
+/* Mixins */
+@import "mixins/general";
+@import "mixins/custom";   
+
+/* Tools */
+@import "tools/site-settings";
+
+
+/* Base */
+@import "base/normalize";
+@import "base/base";
+
+/* Modules */
+@import "modules/animations";
+@import "modules/form";
+@import "modules/tables";
+
+/* Plugins */
+@import "plugins/general";
+@import "plugins/slick";
+@import "plugins/magnific-popup";
+@import "plugins/picker";
+
+/* Layout */  
+@import "layout/header";
+@import "layout/general";
+@import "layout/home";
+@import "layout/catalogo";
+@import "layout/carrito";
+@import "layout/contacto";
+@import "layout/login";
+@import "layout/footer";

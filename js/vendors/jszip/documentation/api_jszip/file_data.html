@@ -1,0 +1,167 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>file_data.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;file(name, data [,options])&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Add (or update) a file to the zip file.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>the name of the file. You can specify folders in the name : the folder separator is a forward slash (&quot;/&quot;).</td>
+</tr>
+<tr>
+<td>data</td>
+<td>String/ArrayBuffer/Uint8Array/Buffer</td>
+<td>the content of the file.</td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>the options.</td>
+</tr>
+</tbody>
+</table>
+<p>Content of <code>options</code> :</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base64</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>set to <code>true</code> if the data is base64 encoded. For example image data from a <code>&lt;canvas&gt;</code> element. Plain text and HTML do not need this option.</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>set to <code>true</code> if the data should be treated as raw content, <code>false</code> if this is a text. If base64 is used, this defaults to <code>true</code>, if the data is not a string, this will be set to <code>true</code>.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>the current date</td>
+<td>the last modification date.</td>
+</tr>
+<tr>
+<td>compression</td>
+<td>string</td>
+<td>null</td>
+<td>If set, specifies compression method to use for this specific file. If not, the default file compression will be used, see <a href="{{site.baseurl}}/documentation/api_jszip/generate.html">generate(options)</a>.</td>
+</tr>
+<tr>
+<td>compressionOptions</td>
+<td>object</td>
+<td><code>null</code></td>
+<td>the options to use when compressing the file, see <a href="{{site.baseurl}}/documentation/api_jszip/generate.html">generate(options)</a>.</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>string</td>
+<td>null</td>
+<td>The comment for this file.</td>
+</tr>
+<tr>
+<td>optimizedBinaryString</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Set to true if (and only if) the input is a &quot;binary string&quot; and has already been prepared with a 0xFF mask.</td>
+</tr>
+<tr>
+<td>createFolders</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Set to true if folders in the file path should be automatically created, otherwise there will only be virtual folders that represent the path to the file.</td>
+</tr>
+<tr>
+<td>unixPermissions</td>
+<td>16 bits number</td>
+<td>null</td>
+<td>The UNIX permissions of the file, if any.</td>
+</tr>
+<tr>
+<td>dosPermissions</td>
+<td>6 bits number</td>
+<td>null</td>
+<td>The DOS permissions of the file, if any.</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>boolean</td>
+<td>false</td>
+<td>Set to true if this is a directory and content should be ignored.</td>
+</tr>
+</tbody>
+</table>
+<p>You shouldn&#39;t update the data given to this method : it is kept as it so any
+update will impact the stored data.</p>
+<p><strong>For the permissions</strong> :</p>
+<p>The field <code>unixPermissions</code> also accepts a string representing the octal value :
+&quot;644&quot;, &quot;755&quot;, etc. On nodejs you can use the <code>mode</code> attribute of
+<a href="http://nodejs.org/api/fs.html#fs_class_fs_stats">nodejs&#39; fs.Stats</a>.</p>
+<p>See also <a href="{{site.baseurl}}/documentation/api_jszip/generate.html">the platform option of generate()</a>.</p>
+<p><strong>About <code>dir</code></strong> :</p>
+<p>If <code>dir</code> is true or if a permission says it&#39;s a folder, this entry be flagged
+as a folder and the content will be ignored.</p>
+<p><strong>Returns</strong> : The current JSZip object, for chaining.</p>
+<p><strong>Throws</strong> : An exception if the data is not in a supported format.</p>
+<!--
+__Complexity__ : **O(1)** for anything but binary strings.
+For binary strings (`data` is a string and `binary` = true), if
+`optimizedBinaryString` is not set, the 0xFF mask will be applied giving a
+complexity in **O(n)** where n is the size of the added data.
+-->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">zip.file(&quot;Hello.txt&quot;, &quot;Hello World\n&quot;);
+
+// base64
+zip.file(&quot;smile.gif&quot;, &quot;R0lGODdhBQAFAIACAAAAAP/eACwAAAAABQAFAAACCIwPkWerClIBADs=&quot;, {base64: true});
+// from an ajax call with xhr.responseType = &#39;arraybuffer&#39;
+zip.file(&quot;smile.gif&quot;, arraybufferFromXhr);
+// or on nodejs
+zip.file(&quot;smile.gif&quot;, fs.readFileSync(&quot;smile.gif&quot;));
+
+zip.file(&quot;Xmas.txt&quot;, &quot;Ho ho ho !&quot;, {date : new Date(&quot;December 25, 2007 00:00:01&quot;)});
+zip.file(&quot;folder/file.txt&quot;, &quot;file in folder&quot;);
+
+zip.file(&quot;animals.txt&quot;, &quot;dog,platypus\n&quot;).file(&quot;people.txt&quot;, &quot;james,sebastian\n&quot;);
+
+// result : Hello.txt, smile.gif, Xmas.txt, animals.txt, people.txt,
+// folder/, folder/file.txt
+// In the above case, the &quot;folder&quot; folder will not have a &#39;D&#39;irectory attribute or Method property. The
+// folder only exists as part of the path to &quot;file.txt&quot;.
+
+zip.file(&quot;folder/file.txt&quot;, &quot;file in folder&quot;, {createFolders: true});
+// In this case, the &quot;folder&quot; folder WILL have a &#39;D&#39;irectory attribute and a Method property of &quot;store&quot;.
+// It will exist whether or not &quot;file.txt&quot; is present.
+
+zip.file(&quot;script.sh&quot;, &quot;echo &#39;hello world&#39;&quot;, {
+  unixPermissions : &quot;755&quot;
+});
+// when generated with platform:UNIX, the script.sh file will be executable
+</code></pre>
+
+      </body>
+    </html>

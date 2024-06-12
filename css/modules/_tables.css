@@ -1,0 +1,71 @@
+@media screen and (max-width: 500px) {
+  .info_aditional th, .info_aditional .fstcampo {
+    vertical-align: middle; }
+
+  #no-more-tables table, #no-more-tables thead, #no-more-tables tbody, #no-more-tables th, #no-more-tables td, #no-more-tables tr {
+    display: block; }
+
+  #no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; }
+
+  #no-more-tables tr {
+    border: 0px solid red;
+    padding-bottom: 28px; }
+
+  #no-more-tables td {
+    border: none;
+    border-bottom: solid 1px #ddd;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align: left;
+    background-color: #FFFFFF;
+    color: #092240;
+    background-image: none;
+    height: auto; }
+
+  #no-more-tables td.esp {
+    padding: 0px !important;
+    display: inline-block;
+    position: relative;
+    height: auto;
+    width: 100%; }
+    #no-more-tables td.esp a {
+      width: 100%; }
+
+  #no-more-tables td.hidde-small {
+    display: none; }
+
+  #no-more-tables td.pos {
+    background-color: #000000;
+    background: transparent url(../images/calendario/bgCol.png) no-repeat left center;
+    color: #FFFFFF; }
+
+  #no-more-tables tr.active td.pos {
+    background-color: #000000;
+    background: transparent url(../images/calendario/bgColBlack.png) no-repeat left center;
+    color: #FFFFFF; }
+
+  #no-more-tables td:before {
+    content: attr(data-title);
+    color: #092240; }
+
+  #no-more-tables td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #000000; }
+
+  #no-more-tables td.pos:before {
+    color: #ffffff;
+    left: 15px;
+    top: 10px; } }
+
+

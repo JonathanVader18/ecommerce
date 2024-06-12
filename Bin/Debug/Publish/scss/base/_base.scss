@@ -1,0 +1,99 @@
+/* ===========================
+   Base
+   =========================== */
+*{
+    margin:0;
+}
+html{
+  height: 100%;
+}
+body {
+  font-family: $font-base;
+  font-weight: 300;
+  font-size: $base-fontsize;
+  line-height: 1.5;
+  color: $color-text-base;
+  text-align: center;
+  background-color:$background-color-base;
+  margin:0;
+  min-width:320px;
+  overflow-x:hidden;
+  text-align: center;
+  text-rendering:optimizelegibility; 
+  //background-image: url(../img/pantallas/servicios.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+  
+}
+
+a:active,a:hover,a:visited,a:focus{
+  outline: none;
+  outline-width: 0;
+  text-decoration: none;
+}
+
+pre{
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+/* especificamos tamaños del sitio */
+
+.wrappercon {
+  float: left;
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+}
+
+.main-container{
+  display: inline-block;
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+}
+
+.seccion{
+  float: left;
+  position: relative;
+  width: 100%;
+}
+
+/* limpiamos y acomodamos objetos */
+.autopos{
+  display: block;
+  margin:0 auto;
+}
+.autopos-2{
+  display: inline-block;
+  margin:0 auto;
+  float:none;
+}
+.no-padding{
+  padding: 0px;
+}
+
+/* pantalla completa */
+.fullwidth,.fullScreen,.fullScreen2{ width: 100%; height: 100%; display: inline-block; z-index: 1; /* min-height: 250px; */}
+
+/* animaciones */
+.wow {
+  opacity: 0;
+  khtml-opacity: 0;
+  -ms-filter: 'progid: DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  filter: alpha(opacity=0);
+}
+.visible {
+  opacity: 1;
+  khtml-opacity: 1;
+  -ms-filter: 'progid: DXImageTransform.Microsoft.Alpha(Opacity=100)';
+  filter: alpha(opacity=100);
+}
+.coverBg{-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
+.animations *, .animated{-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;}
+
+/* pagina 404*/
+.no-found{
+  padding-top:20px;
+  text-align: center;
+} 

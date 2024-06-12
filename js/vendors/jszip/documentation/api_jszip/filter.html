@@ -1,0 +1,66 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>filter.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;filter(predicate)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Filter nested files/folders with the specified function.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>predicate</td>
+<td>function</td>
+<td>the predicate to use.</td>
+</tr>
+</tbody>
+</table>
+<p>The predicate has the following signature : <code>function (relativePath, file) {...}</code> :</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relativePath</td>
+<td>string</td>
+<td>the filename and its path, reliatively to the current folder.</td>
+</tr>
+<tr>
+<td>file</td>
+<td>ZipObject</td>
+<td>the file being tested. See <a href="{{site.baseurl}}/documentation/api_zipobject.html">ZipObject</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>The predicate must return true if the file should be included, false otherwise.</p>
+<p><strong>Returns</strong> : An array of matching ZipObject.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!-- __Complexity__ : **O(k)** where k is the number of entries. -->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip().folder(&quot;dir&quot;);
+zip.file(&quot;readme.txt&quot;, &quot;content&quot;);
+zip.filter(function (relativePath, file){
+  // relativePath == &quot;readme.txt&quot;
+  // file = {name:&quot;dir/readme.txt&quot;,options:{...},asText:function}
+  return true/false;
+});
+</code></pre>
+
+      </body>
+    </html>

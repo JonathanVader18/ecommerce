@@ -1,0 +1,82 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>limitations.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;Limitations of JSZip&quot;
+layout: default
+section: limitations</p>
+<h2 id="fullpage-true">fullpage: true</h2>
+<h3 id="not-supported-features">Not supported features</h3>
+<p>All the features of zip files are not supported. Classic zip files will work
+but encrypted zip, multi-volume, etc are not supported and the load() method
+will throw an <code>Error</code>.</p>
+<h3 id="zip64-and-32bit-integers">ZIP64 and 32bit integers</h3>
+<p>ZIP64 files can be loaded, but only if the zip file is not &quot;too big&quot;. ZIP64 uses 64bits integers
+but Javascript represents all numbers as
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf">64-bit double precision IEEE 754 floating point numbers</a>
+(see section 8.5). So, we have 53bits for integers and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">bitwise operations treat everything as 32bits</a>.
+So if all the 64bits integers can fit into 32 bits integers, everything will be
+fine. If it&#39;s not the case, you will have other problems anyway (see next
+limitation).</p>
+<h3 id="performance-issues">Performance issues</h3>
+<p>An other limitation comes from the browser (and the machine running the
+browser). A compressed zip file of 10MB is &quot;easily&quot; opened by firefox / chrome
+/ opera / IE10+ but will crash older IE. Also keep in mind that strings in
+javascript are encoded in UTF-16 : a 10MB ascii text file will take 20MB of
+memory.</p>
+<p>If you&#39;re having performance issues, please consider the following :</p>
+<ul>
+<li>Don&#39;t use IE &lt;= 9. Everything is better with typed arrays.</li>
+<li>Use typed arrays (Uint8Array, ArrayBuffer, etc) if possible :<ul>
+<li>If you generate a zip file, you should use <code>type:&quot;uint8array&quot;</code>
+(or blob, arraybuffer, nodebuffer).</li>
+<li>If you load the file from an ajax call, ask your XHR an ArrayBuffer.
+Loading a string is asking for troubles.</li>
+</ul>
+</li>
+<li>Don&#39;t use compression (see below).</li>
+<li>If you want to get the content of an ASCII file as a string, consider using
+<code>asBinary()</code> instead of <code>asText()</code>. The transformation
+&quot;binary string&quot; -&gt; &quot;unicode string&quot; is a consuming process.</li>
+</ul>
+<p>Note about compression :
+When reading a file, JSZip will store the content without decompressing it.
+When generating a compressed file, JSZip will reuse if possible compressed
+content :</p>
+<ul>
+<li>If you read a zip file compressed with DEFLATE and call <code>generate</code> with the
+DEFLATE compression, JSZip won&#39;t call the compression algorithms (same with
+STORE everywhere.)</li>
+<li>If you read a zip file compressed with DEFLATE and call <code>generate</code> with the
+STORE compression, JSZip will have to decompress everything.</li>
+</ul>
+<p>On IE &lt;=9, typed arrays are not supported and the compression algorithm
+will fallback on arrays. In that case, JSZip needs to convert the binary string
+into an array, DEFLATE it and convert the result into a binary string.
+You don&#39;t want that to happen.</p>
+<h3 id="the-output-zip-will-differ-from-the-input-zip">The output zip will differ from the input zip</h3>
+<p>Reading and generating a zip file won&#39;t give you back the same file.
+Some data are discarded (file metadata) and other are added (subfolders).</p>
+<h3 id="encodings-support">Encodings support</h3>
+<p>JSZip only supports UTF-8 natively. A zip file doesn&#39;t contain the name of the
+encoding used, you need to know it before doing anything.</p>
+<h4 id="file-name">File name</h4>
+<p>If the name of a file inside the zip is encoded with UTF-8 then JSZip can
+detect it (Language encoding flag, Unicode Path Extra Field). If not, JSZip
+can&#39;t detect the encoding used and will generate <a href="https://en.wikipedia.org/wiki/Mojibake">Mojibake</a>.
+You can use the <a href="{{site.baseurl}}/documentation/api_jszip/generate.html">encodeFileName</a>
+option and the <a href="{{site.baseurl}}/documentation/api_jszip/load.html">decodeFileName</a>
+option to encode/decode using a custom encoding.</p>
+<h4 id="file-content">File content</h4>
+<p>The <code>asText()</code> method uses UTF-8 to decode the content. If you have a text in
+a different encoding, you can get the bytes array with <code>asUint8Array()</code> and
+decode it with a lib (iconv, iconv-lite, etc) on your side.
+To save a text using a non-UTF-8 encoding, do the same : encode it into a
+Uint8Array before adding it to JSZip.</p>
+
+      </body>
+    </html>

@@ -1,0 +1,58 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>upgrade_guide.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: Upgrade Guide
+layout: default</p>
+<h2 id="section-main">section: main</h2>
+<h3 id="from-2-2-2-to-2-3-0">From 2.2.2 to 2.3.0</h3>
+<ul>
+<li>On <code>ZipObject#options</code>, the attributes <code>date</code> and <code>dir</code> have been
+deprecated and are now on <code>ZipObject</code>.</li>
+<li>On <code>ZipObject#options</code>, the attributes <code>base64</code> and <code>binary</code> have been
+deprecated.</li>
+<li><code>JSZip.base64</code>, <code>JSZip.prototype.crc32</code>, <code>JSZip.prototype.utf8decode</code>,
+<code>JSZip.prototype.utf8encode</code> and <code>JSZip.utils</code> have been deprecated.</li>
+</ul>
+<pre><code class="lang-js">// deprecated
+zip.file(&quot;test.txt&quot;).options.date
+zip.file(&quot;test.txt&quot;).options.dir
+// new API
+zip.file(&quot;test.txt&quot;).date
+zip.file(&quot;test.txt&quot;).dir
+</code></pre>
+<h3 id="from-2-0-0-to-2-1-0">From 2.0.0 to 2.1.0</h3>
+<ul>
+<li>The packaging changed : instead of loading jszip.js, jszip-load.js,
+jszip-inflate.js, jszip-deflate.js, just include dist/jszip.js or
+dist/jszip.min.js.
+For AMD loader users : JSZip now registers itself. You just have to put the
+file at the right place or configure your loader.</li>
+</ul>
+<h3 id="from-1-x-to-2-x">From 1.x to 2.x</h3>
+<ul>
+<li><code>JSZipBase64</code> has been renamed to <code>JSZip.base64</code>.</li>
+<li>The <code>data</code> attribute doesn&#39;t exist anymore :
+use the getters <code>asText()</code>, <code>asBinary()</code>, etc</li>
+<li>The compression/decompression methods now give their input type with the
+<code>compressInputType</code> and <code>uncompressInputType</code> attributes.</li>
+</ul>
+<p>Example for the data attribute :</p>
+<pre><code class="lang-js">// before
+zip.file(&quot;test.txt&quot;).data;
+zip.files[&quot;test.txt&quot;].data;
+zip.file(&quot;image.png&quot;).data;
+zip.files[&quot;image.png&quot;].data;
+
+// after
+zip.file(&quot;test.txt&quot;).asText();
+zip.files[&quot;test.txt&quot;].asText();
+zip.file(&quot;image.png&quot;).asBinary();
+zip.files[&quot;image.png&quot;].asBinary();
+</code></pre>
+
+      </body>
+    </html>

@@ -1,0 +1,36 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.markdown</title>
+      </head>
+      <body>
+        <h1 id="jszip-build-status-https-api-travis-ci-org-stuk-jszip-svg-branch-master-http-travis-ci-org-stuk-jszip-code-climate-https-codeclimate-com-github-stuk-jszip-badges-gpa-svg-https-codeclimate-com-github-stuk-jszip-">JSZip <a href="http://travis-ci.org/Stuk/jszip"><img src="https://api.travis-ci.org/Stuk/jszip.svg?branch=master" alt="Build Status"></a> <a href="https://codeclimate.com/github/Stuk/jszip"><img src="https://codeclimate.com/github/Stuk/jszip/badges/gpa.svg" alt="Code Climate"></a></h1>
+<p><a href="https://saucelabs.com/u/jszip"><img src="https://saucelabs.com/browser-matrix/jszip.svg" alt="Selenium Test Status"></a></p>
+<p>A library for creating, reading and editing .zip files with Javascript, with a
+lovely and simple API.</p>
+<p>See <a href="http://stuartk.com/jszip">http://stuartk.com/jszip</a> for all the documentation.</p>
+<pre><code class="lang-javascript">var zip = new JSZip();
+
+zip.file(&quot;Hello.txt&quot;, &quot;Hello World\n&quot;);
+
+var img = zip.folder(&quot;images&quot;);
+img.file(&quot;smile.gif&quot;, imgData, {base64: true});
+
+var content = zip.generate({type:&quot;blob&quot;});
+
+// see FileSaver.js
+saveAs(content, &quot;example.zip&quot;);
+
+/*
+Results in a zip containing
+Hello.txt
+images/
+    smile.gif
+*/
+</code></pre>
+<h2 id="license">License</h2>
+<p>JSZip is dual-licensed. You may use it under the MIT license <em>or</em> the GPLv3
+license. See <a href="LICENSE.markdown">LICENSE.markdown</a>.</p>
+
+      </body>
+    </html>

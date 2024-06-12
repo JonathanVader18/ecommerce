@@ -1,0 +1,135 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>read_zip.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;How to read a file&quot;
+layout: default</p>
+<h2 id="section-example">section: example</h2>
+<p>This page explains how to read an existing zip file or add a existing file into
+the zip file.</p>
+<h3 id="in-the-browser">In the browser</h3>
+<h4 id="ajax-request">AJAX request</h4>
+<p>Getting binary data with an ajax request is hard (mainly because of IE &lt;= 9).
+The easy way is to use <a href="https://github.com/stuk/jszip-utils">JSZipUtils.getBinaryContent</a>.
+With JSZipUtils.getBinaryContent, you can do the following (see the
+documentation for more examples) :</p>
+<pre><code class="lang-js">JSZipUtils.getBinaryContent(&#39;path/to/content.zip&#39;, function(err, data) {
+  if(err) {
+    throw err; // or handle err
+  }
+
+  var zip = new JSZip(data);
+});
+</code></pre>
+<p><br></p>
+<p>If you need to adapt an existing solution to what getBinaryContent does, here
+are the details. When doing a XHR request (level 1, without setting the
+<code>responseType</code>) the browser will try to interpret the response as a string and
+decode it from its charset. To avoid this on Firefox/Chrome/Opera, you need to
+set mime type : <code>xhr.overrideMimeType(&quot;text/plain; charset=x-user-defined&quot;);</code>.
+On IE &lt;= 9, this is harder. The overrideMimeType trick doesn&#39;t work so we need
+to use <a href="http://stackoverflow.com/questions/1095102/how-do-i-load-binary-image-data-using-javascript-and-xmlhttprequest">vbscript</a>
+and non standard attributes.
+On IE &gt; 9, overrideMimeType doesn&#39;t work but xhr2 does.</p>
+<p>With <a href="http://caniuse.com/xhr2">xhr 2</a>, you can just set the responseType
+attribute : <code>xhr.responseType = &quot;arraybuffer&quot;;</code>. With this, the browser will
+return an ArrayBuffer.</p>
+<h4 id="local-files">Local files</h4>
+<p>If the browser supports the <a href="http://caniuse.com/filereader">FileReader API</a>,
+you can use it to read a zip file. JSZip can read ArrayBuffer, so you can use
+<code>FileReader.readAsArrayBuffer(Blob)</code>, see this <a href="{{site.baseurl}}/documentation/examples/read-local-file-api.html">example</a>.</p>
+<h3 id="in-nodejs">In nodejs</h3>
+<p>JSZip can read Buffers so you can do the following :</p>
+<h4 id="local-file">Local file</h4>
+<pre><code class="lang-js">&quot;use strict&quot;;
+
+var fs = require(&quot;fs&quot;);
+var JSZip = require(&quot;jszip&quot;);
+
+// read a zip file
+fs.readFile(&quot;test.zip&quot;, function(err, data) {
+  if (err) throw err;
+  var zip = new JSZip(data);
+});
+
+// read a file and add it to a zip
+fs.readFile(&quot;picture.png&quot;, function(err, data) {
+  if (err) throw err;
+  var zip = new JSZip();
+  zip.file(&quot;picture.png&quot;, data);
+});
+</code></pre>
+<h4 id="remote-file">Remote file</h4>
+<p>There are a lot of nodejs libraries doing http requests, from the built-in
+<a href="http://nodejs.org/docs/latest/api/http.html">http</a> to the
+<a href="https://www.npmjs.org/browse/keyword/http">npm packages</a>. Here are two
+examples, one with the default http API, the other with
+<a href="https://github.com/mikeal/request">request</a> (but you&#39;re free to use your
+favorite library !). If possible, download the file as a Buffer (you will get
+better performances). If it&#39;s not possible, you can fallback to a binary string
+(the option is likely to be <code>encoding : &quot;binary&quot;</code>).</p>
+<h5 id="with-http-">With http :</h5>
+<pre><code class="lang-js">&quot;use strict&quot;;
+
+var http = require(&quot;http&quot;);
+var url = require(&quot;url&quot;);
+var JSZip = require(&quot;jszip&quot;);
+
+var req = http.get(url.parse(&quot;http://localhost/.../file.zip&quot;), function (res) {
+  if (res.statusCode !== 200) {
+    console.log(res.statusCode);
+    // handle error
+    return;
+  }
+  var data = [], dataLen = 0;
+
+  // don&#39;t set the encoding, it will break everything !
+  // or, if you must, set it to null. In that case the chunk will be a string.
+
+  res.on(&quot;data&quot;, function (chunk) {
+    data.push(chunk);
+    dataLen += chunk.length;
+  });
+
+  res.on(&quot;end&quot;, function () {
+    var buf = new Buffer(dataLen);
+    for (var i=0,len=data.length,pos=0; i&lt;len; i++) {
+      data[i].copy(buf, pos);
+      pos += data[i].length;
+    }
+
+    // here we go !
+    var zip = new JSZip(buf);
+    console.log(zip.file(&quot;content.txt&quot;).asText());
+  });
+});
+
+req.on(&quot;error&quot;, function(err){
+  // handle error
+});
+</code></pre>
+<h5 id="with-request-">With request :</h5>
+<pre><code class="lang-js">&quot;use strict&quot;;
+
+var request = require(&#39;request&#39;);
+var JSZip = require(&quot;jszip&quot;);
+
+request({
+  method : &quot;GET&quot;,
+  url : &quot;http://localhost/.../file.zip&quot;,
+  encoding: null // &lt;- this one is important !
+}, function (error, response, body) {
+  if(error ||  response.statusCode !== 200) {
+    // handle error
+    return;
+  }
+  var zip = new JSZip(body);
+  console.log(zip.file(&quot;content.txt&quot;).asText());
+});
+</code></pre>
+
+      </body>
+    </html>

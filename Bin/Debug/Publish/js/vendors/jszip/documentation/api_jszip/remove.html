@@ -1,0 +1,47 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>remove.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;remove(name)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Delete a file or folder (recursively).</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>the name of the file/folder to delete.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns</strong> : The current JSZip object.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!--
+__Complexity__ : **O(k)** where k is the number of entry to delete (may be > 1
+when removing a folder).
+-->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.file(&quot;Hello.txt&quot;, &quot;Hello World\n&quot;);
+zip.file(&quot;temp.txt&quot;, &quot;nothing&quot;).remove(&quot;temp.txt&quot;);
+// result : Hello.txt
+
+zip.folder(&quot;css&quot;).file(&quot;style.css&quot;, &quot;body {background: #FF0000}&quot;);
+zip.remove(&quot;css&quot;);
+//result : empty zip
+</code></pre>
+
+      </body>
+    </html>

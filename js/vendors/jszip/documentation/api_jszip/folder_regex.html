@@ -1,0 +1,51 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>folder_regex.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;folder(regex)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Search a subdirectory in the current directory with a
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expression</a>.
+The regex is tested against the relative path.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>regex</td>
+<td>RegExp</td>
+<td>the regex to use.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns</strong> : An array of matching folders (an empty array if none matched).
+Each maching folder is an instance of <a href="{{site.baseurl}}/documentation/api_zipobject.html">ZipObject</a>.</p>
+<p><strong>Throws</strong> : Nothing.</p>
+<!--
+__Complexity__ : **O(k)** where k is the number of entries in the current JSZip
+instance.
+-->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.folder(&quot;home/Pierre/videos&quot;);
+zip.folder(&quot;home/Pierre/photos&quot;);
+zip.folder(&quot;home/Jean/videos&quot;);
+zip.folder(&quot;home/Jean/photos&quot;);
+
+zip.folder(/videos/); // array of size 2
+
+zip.folder(&quot;home/Jean&quot;).folder(/^vid/); // array of 1
+</code></pre>
+
+      </body>
+    </html>

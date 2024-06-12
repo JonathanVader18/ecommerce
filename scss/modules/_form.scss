@@ -1,0 +1,167 @@
+  /* formularios */
+  #error-container {
+    margin: 0;
+    & label {
+      font-size: 12px;
+      display: block;
+    }
+  }
+  form.form-general{
+      & label{
+      text-align: left;
+      color: #4d4d4d;
+      font-size: 14px;
+      font-family: $font-secondary;
+     }
+    %inputsforms{
+      height: auto;
+      border: 1px solid #dddddd;
+      @include border-radius(0px);
+      background-color: #fff;
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #000000;
+      font-weight: 500;
+      font-family: $font-secondary;
+      font-size: 12px;
+      border-radius:0px;
+       &:focus{
+        border: 1px solid #000000;
+        @include border-radius(0px);
+       }
+    }
+    & textarea{
+      @extend %inputsforms;
+      resize: none;
+    }
+    & input{
+      &[type="text"],
+      &[type="email"],
+      &[type="url"],
+      &[type="tel"],
+      &[type="number"],
+      &[type="date"],
+      &[type="range"],
+      &[type="password"],
+      &[type="text"]{
+        @extend %inputsforms;
+      }
+      
+      &[type="checkbox"]{
+         @include border-radius(0px);
+         border: 1px solid #000000;
+      }
+      &[type="file"] {
+        margin-bottom: 30px;
+        color: #3a3c41;
+      }
+      &[type="submit"] {
+       text-transform: uppercase;
+        @include border-radius(28px);
+        color:#FFFFFF;
+        background-color: #000000;
+        padding: 10px 20px;
+        width:auto;
+          &:hover, &:focus{
+            background-color: transparent;
+            color:#000000;
+            border-color:#000000;
+          }
+          & span:after{
+            content: "\f178";
+            font-family: FontAwesome;
+            margin-left: 10px;
+          }
+      }
+    }
+    & input.error{
+      border: 1px solid #ff0000;
+    }
+    & textarea.error{
+      @extend input.error;
+    }
+    & fieldset{
+      border:none;
+      legend{
+        font-family: $font-secondary;
+        color: #000000;
+        text-transform:uppercase;
+        font-size:12px;
+        font-weight:800;
+        border-bottom:1px solid #dddddd;
+        padding-bottom:10px;
+        margin-bottom:10px;
+        display:inline-block;
+        width:100%;
+      }
+      label {
+        font-family: $font-secondary;
+        color: #000000;
+        font-weight: 500;
+        border-bottom: none;
+        padding: 5px;
+        float: left;
+      }
+      .common {
+        display: inline-block;
+        float: left;
+        margin-left: 7px;
+      }
+    }
+    & p {
+      margin: 0;
+    }
+   
+  }
+  .checkbox{
+          position: relative;
+          display: inline-block;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          float: left;
+          padding-left: 15px;
+      }
+  .checkbox-2{
+          position: relative;
+          display: inline-block;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          float: left;
+          padding-left: 0px;
+          font-size:12px;
+      }
+  /* fin formularios */
+.select-general{
+      height: auto;
+      border: 1px solid #dddddd;
+      @include border-radius(0px);
+      background-color: #fff;
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #000000;
+      font-weight: 500;
+      font-family: $font-secondary;
+      font-size: 12px;
+      border-radius:0px;
+       &:focus{
+        border: 1px solid #000000;
+        @include border-radius(0px);
+       }
+}
+.avisos{
+  display:inline-block;
+  position:relative;
+  padding:10px 0px;
+  font-size:10px;
+  text-align:left;
+  color:#4d4d4d;
+  & a{
+    color:#4d4d4d;
+    text-decoration: underline;
+    &:hover{
+      color:#f15a24;
+    }
+  }
+}

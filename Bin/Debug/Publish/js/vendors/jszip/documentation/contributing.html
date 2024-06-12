@@ -1,0 +1,52 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>contributing.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: Contributing
+layout: default</p>
+<h2 id="section-main">section: main</h2>
+<h3 id="download-the-sources">Download the sources</h3>
+<p>You should create a <a href="https://github.com/">Github</a> account and
+<a href="https://help.github.com/articles/fork-a-repo">fork the repository</a> (you will
+need one to create the pull request).</p>
+<p>If you just want the get the source code, you can use git and do
+<code>git clone https://github.com/Stuk/jszip.git</code> to get the sources. You can also
+download the latest sources <a href="https://github.com/Stuk/jszip/archive/master.zip">here</a>.</p>
+<h3 id="building-the-project">Building the project</h3>
+<h4 id="code">Code</h4>
+<p>The dependencies are handled by npm, the first step is to run
+<code>npm install</code> to get the dependencies.
+JSZip uses Grunt to handle the build, <a href="http://gruntjs.com/getting-started">see here to install its CLI</a>.</p>
+<p>Here are the interesting build commands :</p>
+<ul>
+<li><code>grunt</code> will generate the final js file in dist/ and the minified version.</li>
+<li><code>npm run test-node</code> will run the tests in nodejs.</li>
+<li><code>npm run test-browser</code> will the tests in some browsers using SauceLabs, see
+below.</li>
+<li><code>npm run test</code> will run the tests in nodejs and in the browser.</li>
+<li><code>npm run lint</code> will use jshint the check the source code.</li>
+</ul>
+<h4 id="documentation">Documentation</h4>
+<p>The documentation uses jekyll on gh-pages. To render the documentation, you
+need to <a href="http://jekyllrb.com/docs/installation/">install jekyll</a> and then run
+<code>jekyll serve --baseurl &#39;&#39;</code>.</p>
+<h3 id="testing-the-project">Testing the project</h3>
+<p>To test JSZip in nodejs, use <code>npm run test-node</code>.</p>
+<p>To test JSZip in a browser, you can open the file <code>test/index.html</code> in the
+browser you want to test. Don&#39;t forget to update the dist/ files with <code>grunt</code>.</p>
+<p>You can also test JSZip in a lot of browsers at once with
+<a href="https://saucelabs.com/">SauceLabs</a>. You will need a SauceLabs account and two
+variables into your environment. On linux, just use</p>
+<pre><code class="lang-bash">export SAUCE_USERNAME=your-saucelabs-username
+export SAUCE_ACCESS_KEY=your-saucelabs-access-key
+</code></pre>
+<p>before running the <code>npm run test-browser</code> command.</p>
+<h3 id="merging-the-changes">Merging the changes</h3>
+<p>If you have tested bug fixes or new features, you can open a
+<a href="https://help.github.com/articles/using-pull-requests">pull request</a> on Github.</p>
+
+      </body>
+    </html>

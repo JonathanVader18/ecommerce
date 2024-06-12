@@ -1,0 +1,54 @@
+html{
+	height: 100%;
+}
+body.gtk-2{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.cent-img{
+	margin:0 auto;
+	margin-bottom: 20px;
+}
+.text-underline{
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ddd;
+	display: inline-block;
+	font-family: $font-secondary;
+}
+.text-login{
+	padding: 5px 0px;
+	color:#4d4d4d;
+	font-family: $font-secondary;
+	font-size: 12px;
+}
+.marco-form{
+	border: 1px solid #000000;
+	display: inline-block;
+	position: relative;
+	padding:15px;
+	font-family: $font-secondary;
+	& label{
+		text-align: left;
+		float: left;
+		color:#4d4d4d;
+	}
+	& .link-lp{
+		color:#9e9e9e;
+		text-align: left;
+		float:left;
+	}
+}
+
+.act-altcuenta{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding:80px 0px;
+}

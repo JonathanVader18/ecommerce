@@ -1,0 +1,23 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>constructor_load.md</title>
+      </head>
+      <body>
+        <hr>
+<p>title: &quot;new JSZip(data [,options]) or JSZip(data [,options])&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p>This is a shortcut for</p>
+<pre><code class="lang-js">var zip = new JSZip();
+zip.load(data, options);
+</code></pre>
+<p>Please see the documentation of <a href="{{site.baseurl}}/documentation/api_jszip/load.html">load</a>.</p>
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var zip = new JSZip(data, options);
+// same as
+var zip = JSZip(data, options);
+</code></pre>
+
+      </body>
+    </html>
