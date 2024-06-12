@@ -1391,7 +1391,7 @@ Partial Class preview_popup
                 Next
 
                 objDatos.fnLog("Descuento a aplicar:", "Especial:" & fDescuentoEspecial & " Volumen:" & fDescuentoEspecialxCantidad)
-
+                'test
 
             End If
         End If
