@@ -1368,7 +1368,7 @@ Partial Class Carrito
         Catch ex As Exception
             objDatos.fnLog("Carrito load ex9", ex.Message.Replace("'", ""))
         End Try
-
+        ''otro
 
 
 
